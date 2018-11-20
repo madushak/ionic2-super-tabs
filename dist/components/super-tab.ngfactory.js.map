@@ -1,0 +1,1 @@
+{"version":3,"file":"super-tab.ngfactory.js","sourceRoot":"","sources":["../../src/components/super-tab.ngfactory.ts","../../src/components/super-tab.ts.SuperTabComponent.html"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;sGCAA,wGAAe,KAAM,kGAAuB","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n","<div #viewport></div><div class=\"nav-decor\"></div>"]}
