@@ -133,28 +133,54 @@ export class SuperTabsToolbar implements AfterViewInit, OnDestroy {
     this.setIndicatorProperties(width, position, animate);
   }
 
-  setIndicatorPosition(position: number, animate?: boolean) {
-    this.setIndicatorProperties(this.indicatorWidth, position, animate);
+  setIndicatorPosition(position: number, animate?: boolean, prev?: number, now?: number, last?: number) {
+    this.setIndicatorProperties(this.indicatorWidth, position, animate, prev, now, last);
   }
 
   setIndicatorWidth(width: number, animate?: boolean) {
     this.setIndicatorProperties(width, this.indicatorPosition, animate);
   }
 
-  setIndicatorProperties(width: number, position: number, animate?: boolean) {
+  setIndicatorProperties(width: number, position: number, animate?: boolean, prev?: number, now?: number, last?: number) {
+    var forward = false;
+    var backward = false;
+    if(prev == last && now == 0){
+        forward = true;
+    }
+
+    if(prev == 0 && now == last){
+        backward = true;
+    }
     this.indicatorWidth = width;
     this.indicatorPosition = position;
     const scale = width / 100;
     this.toggleAnimation('indicator', animate);
-    this.rnd.setStyle(
-      this.indicator.nativeElement,
-      this.plt.Css.transform,
-      'translate3d(' +
-        (position - this.segmentPosition) +
-        'px, 0, 0) scale3d(' +
-        scale +
-        ', 1, 1)'
-    );
+    
+    var _this = this;
+    if(forward){
+        this.indicator.nativeElement.style.webkitTransitionDuration = "100ms"
+        this.plt.timeout(function () {
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(0, 1, 1)');
+        }, 10);
+
+        this.plt.timeout(function () {
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0)');
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'scale3d(' + scale + ', 1, 1)');
+            _this.indicator.nativeElement.style.webkitTransitionDuration = "300ms";
+        }, 150);
+    } if(backward){
+        this.indicator.nativeElement.style.webkitTransitionDuration = "100ms"
+        this.plt.timeout(function () {
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(-' + width + 'px, 0, 0) scale3d(0, 1, 1)');
+        }, 10);
+
+        this.plt.timeout(function () {
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
+            _this.indicator.nativeElement.style.webkitTransitionDuration = "300ms";
+        }, 150);
+    }else{
+        this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transform, 'translate3d(' + (position - this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
+    }
   }
 
   setSegmentPosition(position: number, animate?: boolean) {

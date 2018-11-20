@@ -154,8 +154,9 @@ export class SuperTabsComponent
    */
   @Input()
   set selectedTabIndex(val: number) {
+    var prev = this._selectedTabIndex;
     this._selectedTabIndex = Number(val);
-    this.init && this.alignIndicatorPosition(true);
+    this.init && this.alignIndicatorPosition(true, prev, this._selectedTabIndex, this._tabs.length - 1);
   }
 
   get selectedTabIndex(): number {
@@ -743,7 +744,7 @@ export class SuperTabsComponent
   /**
    * Aligns slide position with selected tab
    */
-  private alignIndicatorPosition(animate: boolean = false) {
+  private alignIndicatorPosition(animate: boolean = false, prev, now, last) {
     if (!this._isToolbarVisible) {
       return;
     }
@@ -758,7 +759,10 @@ export class SuperTabsComponent
     } else {
       this.toolbar.setIndicatorPosition(
         this.getAbsoluteIndicatorPosition(),
-        animate
+        animate,
+        prev, 
+        now, 
+        last
       );
     }
   }
