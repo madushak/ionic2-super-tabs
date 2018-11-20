@@ -744,7 +744,7 @@ export class SuperTabsComponent
   /**
    * Aligns slide position with selected tab
    */
-  private alignIndicatorPosition(animate: boolean = false, prev, now, last) {
+  private alignIndicatorPosition(animate: boolean = false, prev: number = 0, now: number = 0, last: number = 0) {
     if (!this._isToolbarVisible) {
       return;
     }
