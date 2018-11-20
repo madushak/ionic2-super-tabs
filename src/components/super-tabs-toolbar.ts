@@ -157,29 +157,37 @@ export class SuperTabsToolbar implements AfterViewInit, OnDestroy {
     this.toggleAnimation('indicator', animate);
     
     var _this = this;
-    if(forward){
-        this.indicator.nativeElement.style.webkitTransitionDuration = "100ms"
-        this.plt.timeout(function () {
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(0, 1, 1)');
-        }, 10);
-
-        this.plt.timeout(function () {
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0)');
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'scale3d(' + scale + ', 1, 1)');
-            _this.indicator.nativeElement.style.webkitTransitionDuration = "300ms";
-        }, 150);
-    } if(backward){
-        this.indicator.nativeElement.style.webkitTransitionDuration = "100ms"
-        this.plt.timeout(function () {
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'scale3d(0, 1, 1)');
-        }, 10);
-
-        this.plt.timeout(function () {
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
-            _this.indicator.nativeElement.style.webkitTransitionDuration = "300ms";
-        }, 150);
+    if (forward) {
+      this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transitionDuration, '100ms');
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0)');
+      }, 5);
+      
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(0, 1, 1)');
+      }, 110);
+      
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transitionDuration, '300ms');
+      }, 220);
+    }
+    if (backward) {
+      this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transitionDuration, '100ms');
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(0px, 0, 0) scale3d(0, 1, 1)');
+      }, 5);
+      
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(0, 1, 1)');
+      }, 110);
+      
+      this.plt.timeout(function () {
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
+          _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transitionDuration, '300ms');
+      }, 220);
     }else{
-        this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transform, 'translate3d(' + (position - this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
+      this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transform, 'translate3d(' + (position - this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
     }
   }
 
