@@ -171,7 +171,7 @@ export class SuperTabsToolbar implements AfterViewInit, OnDestroy {
     } if(backward){
         this.indicator.nativeElement.style.webkitTransitionDuration = "100ms"
         this.plt.timeout(function () {
-            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(-' + width + 'px, 0, 0) scale3d(0, 1, 1)');
+            _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'scale3d(0, 1, 1)');
         }, 10);
 
         this.plt.timeout(function () {
