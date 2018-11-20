@@ -81,15 +81,18 @@ var SuperTabsToolbar = (function () {
         if (forward) {
             this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transitionDuration, '100ms');
             this.plt.timeout(function () {
-                _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0)');
+                _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
             }, 5);
             this.plt.timeout(function () {
+                _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(0, 1, 1)');
+            }, 150);
+            this.plt.timeout(function () {
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(0, 1, 1)');
-            }, 110);
+            }, 250);
             this.plt.timeout(function () {
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transitionDuration, '300ms');
-            }, 220);
+            }, 360);
         }
         if (backward) {
             this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transitionDuration, '100ms');
@@ -98,11 +101,11 @@ var SuperTabsToolbar = (function () {
             }, 5);
             this.plt.timeout(function () {
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (width * (last + 1)) + 'px, 0, 0) scale3d(0, 1, 1)');
-            }, 110);
+            }, 150);
             this.plt.timeout(function () {
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transform, 'translate3d(' + (position - _this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
                 _this.rnd.setStyle(_this.indicator.nativeElement, _this.plt.Css.transitionDuration, '300ms');
-            }, 220);
+            }, 300);
         }
         else {
             this.rnd.setStyle(this.indicator.nativeElement, this.plt.Css.transform, 'translate3d(' + (position - this.segmentPosition) + 'px, 0, 0) scale3d(' + scale + ', 1, 1)');
